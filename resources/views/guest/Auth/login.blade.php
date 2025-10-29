@@ -87,7 +87,7 @@
             font-weight: 500;
         }
 
-        .form-box input[id="username"],
+        .form-box input[id="name"],
         .form-box input[id="password"] {
             width: 100%;
             padding: 12px 10px;
@@ -198,26 +198,29 @@
     <div class="container">
         <div class="left-section">
             <h2>Selamat Datang di Website Perangkat dan Lembaga Desa</h2>
-            <p>Melalui media ini, kami berkomitmen untuk mewujudkan pelayanan yang transparan, akuntabel, dan berorientasi pada kesejahteraan masyarakat desa.</p>
-            <div class="logo">
+            <p>Melalui media ini, kami berkomitmen untuk mewujudkan pelayanan yang transparan, akuntabel, dan
+                berorientasi pada kesejahteraan masyarakat desa.</p>
+            {{-- <div class="logo">
                 <!-- Gambar logo atau ilustrasi, bisa diganti src nya -->
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" width="120">
-            </div>
+            </div> --}}
         </div>
         <div class="right-section">
             <div class="form-box">
                 <h3>Welcome!</h3>
                 <div style="margin-bottom:12px;color:#666;font-size:0.97rem;">Please login to your account.</div>
-                <form action={{ route('auth.login') }} method="post">
+                <form action="{{ route('auth.process') }}" method="POST">
                     @csrf
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="name">Nama</label>
+                    <input type="text" id="name" name="name" required>
+
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
+
                     <button type="submit">Login</button>
 
                     @if ($errors->any())
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger mt-3">
                             <ul class="mb-0">
                                 @foreach ($errors->all() as $err)
                                     <li>{{ $err }}</li>
@@ -226,6 +229,7 @@
                         </div>
                     @endif
                 </form>
+
             </div>
         </div>
     </div>
