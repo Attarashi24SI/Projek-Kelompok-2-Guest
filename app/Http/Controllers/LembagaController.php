@@ -60,18 +60,26 @@ class LembagaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $lembaga = Lembaga::findOrFail($id);
+        return view('guest.perangkat.lembaga.edit', compact('lembaga'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $lembaga = Lembaga::findOrFail($id);
+
+        $lembaga->update([
+            'nama_lembaga' => $request->nama_lembaga,
+            'deskripsi' => $request->deskripsi,
+            'kontak' => $request->kontak,
+        ]);
+
+        return redirect()->route('guest.perangkat.lembaga.index')
+            ->with('success', 'Data lembaga berhasil diperbarui!');
     }
+
 
     /**
      * Remove the specified resource from storage.
