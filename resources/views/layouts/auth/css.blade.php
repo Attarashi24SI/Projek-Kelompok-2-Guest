@@ -1,4 +1,3 @@
-
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +13,7 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="{{asset ('assets-guest/css/lembaga/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{asset ('assets-guest/css/auth/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="{{asset ('assets-guest/css/lembaga/style.css') }}" rel="stylesheet">
+        <link href="{{asset ('assets-guest/css/auth/auth.css') }}" rel="stylesheet">
