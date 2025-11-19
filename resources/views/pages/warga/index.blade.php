@@ -48,22 +48,47 @@
                 <div class="text-center mx-auto pt-5 pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
                     <h4 class="text-uppercase text-primary">Menu CRUD Warga</h4>
                 </div>
-                <a href="{{ route('pages.warga.create') }}" class="btn btn-primary mb-3" ><img src="https://cdn-icons-png.flaticon.com/128/6711/6711405.png" style="width:15%; height:15%;" alt="">Tambah Data</a>
+                <a href="{{ route('pages.warga.create') }}" class="btn btn-primary mb-3"><img
+                        src="https://cdn-icons-png.flaticon.com/128/6711/6711405.png" style="width:15%; height:15%;"
+                        alt="">Tambah Data</a>
                 <div class="row">
                     @foreach ($dataWarga as $warga)
                         <div class="col-md-4">
                             <div class="card mb-3 shadow-sm">
                                 <div class="card-body">
+                                    <p class="card-tesxt">#{{ $warga->warga_id }}</p>
                                     <h5 class="card-title">{{ $warga->nama }}</h5>
                                     <p class="card-text">No Telp: {{ $warga->telp }}</p>
                                     <p class="card-text">Email: {{ $warga->email }}</p>
 
-                                    <a href="{{ route('pages.warga.edit', $warga->warga_id) }}"
-                                        class="btn btn-primary mb-3"><img src="https://cdn-icons-png.flaticon.com/128/14034/14034300.png" style="width:15%; height:15%;" alt="">Edit</a>
+                                    <div class="dropdown mb-3">
+                                        <button class="btn btn-primary dropdown-toggle rounded-pill" type="button"
+                                            data-bs-toggle="dropdown">
+                                            <img src="https://cdn-icons-png.flaticon.com/128/14034/14034300.png"
+                                                style="width:15%; height:15%;" alt=""> Aksi
+                                        </button>
 
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('pages.warga.edit', $warga->warga_id) }}">
+                                                    <img src="https://cdn-icons-png.flaticon.com/128/14034/14034300.png"
+                                                        style="width:12%; height:12%;" alt="">
+                                                    Edit
+                                                </a>
+                                            </li>
 
-                                    <a href="{{ route('pages.warga.delete', $warga->warga_id) }}" class="btn btn-primary mb-3"
-                                        onclick="return confirm('Yakin ingin menghapus data ini?')"><img src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" style="width:15%; height:15%;" alt="">Hapus</a>
+                                            <li>
+                                                <a class="dropdown-item text-danger"
+                                                    href="{{ route('pages.warga.delete', $warga->warga_id) }}"
+                                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                    <img src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png"
+                                                        style="width:12%; height:12%;" alt="">
+                                                    Hapus
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -74,10 +99,12 @@
         <!-- feature End -->
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+        <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i
+                class="fa fa-arrow-up"></i></a>
 
 
 
-</body>
+    </body>
 @endsection
+
 </html>

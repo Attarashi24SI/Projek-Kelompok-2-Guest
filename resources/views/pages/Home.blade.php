@@ -449,7 +449,8 @@
 
                                 <a href="#" class="h4 d-inline-block mb-3">User</a>
                                 <p class="fs-4 text-primary mb-3"></p>
-                                <a href="{{ route('user.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                                <a href="{{ route('user.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">Read
+                                    More</a>
                             </div>
                         </div>
                     </div>
@@ -460,10 +461,39 @@
 
                                 <a href="#" class="h4 d-inline-block mb-3">Lembaga Desa</a>
                                 <p class="fs-4 text-primary mb-3"></p>
-                                <a href="{{ route('pages.perangkat.lembaga.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                                <a href="{{ route('pages.perangkat.lembaga.index') }}"
+                                    class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
                             </div>
                         </div>
                     </div>
+                    <br>
+
+                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="product-item">
+                            {{-- <img src="img/product-1.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                            <div class="product-content bg-light text-center rounded-bottom p-4">
+
+                                <a href="#" class="h4 d-inline-block mb-3">Jabatan Lembaga</a>
+                                <p class="fs-4 text-primary mb-3"></p>
+                                <a href="{{ route('jabatanlembaga.index') }}"
+                                    class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="product-item">
+                            {{-- <img src="img/product-1.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                            <div class="product-content bg-light text-center rounded-bottom p-4">
+
+                                <a href="#" class="h4 d-inline-block mb-3">Anggota Lembaga</a>
+                                <p class="fs-4 text-primary mb-3"></p>
+                                <a href="{{ route('anggotalembaga.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

@@ -7,6 +7,8 @@ use App\Http\Controllers\WargaController;
 use App\Http\Controllers\LembagaController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AnggotaLembagaController;
+use App\Http\Controllers\JabatanLembagaController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -48,19 +50,14 @@ Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->n
 // warga
 // tampilkan data
 Route::get('/warga', [WargaController::class, 'index'])->name('pages.warga.index');
-
 // tampilkan form tambah data
 Route::get('/warga/create', [WargaController::class, 'create'])->name('pages.warga.create');
-
 // simpan data baru
 Route::post('/warga/store', [WargaController::class, 'store'])->name('pages.warga.store');
-
 // tampilkan form edit
 Route::get('/warga/edit/{id}', [WargaController::class, 'edit'])->name('pages.warga.edit');
-
 // update data hasil edit
 Route::post('/warga/update/{id}', [WargaController::class, 'update'])->name('pages.warga.update');
-
 // hapus data
 Route::get('/warga/delete/{id}', [WargaController::class, 'delete'])->name('pages.warga.delete');
 
@@ -77,28 +74,62 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.dest
 // Menampilkan daftar lembaga
 Route::get('/pages/perangkat/lembaga', [LembagaController::class, 'index'])
     ->name('pages.perangkat.lembaga.index');
-
 // Menampilkan form tambah lembaga
 Route::get('/pages/perangkat/lembaga/create', [LembagaController::class, 'create'])
     ->name('pages.perangkat.lembaga.create');
-
 // Menyimpan data lembaga
 Route::post('/pages/perangkat/lembaga/store', [LembagaController::class, 'store'])
     ->name('pages.perangkat.lembaga.store');
-
 // Mengedit lembaga
 Route::get('/pages/perangkat/lembaga/{id}/edit', [LembagaController::class, 'edit'])
     ->name('pages.perangkat.lembaga.edit');
-
 // Mengupdate data lembaga
 Route::put('/pages/perangkat/lembaga/{id}', [LembagaController::class, 'update'])
     ->name('pages.perangkat.lembaga.update');
-
 // Menghapus lembaga
 Route::delete('/pages/perangkat/lembaga/{id}', [LembagaController::class, 'destroy'])
     ->name('pages.perangkat.lembaga.destroy');
 
 
+// Tampilkan semua data jabatan lembaga
+Route::get('/jabatan-lembaga', [JabatanLembagaController::class, 'index'])
+    ->name('jabatanlembaga.index');
+
+// Form tambah data jabatan lembaga
+Route::get('/jabatan-lembaga/create', [JabatanLembagaController::class, 'create'])
+    ->name('jabatanlembaga.create');
+
+// Simpan data jabatan lembaga
+Route::post('/jabatan-lembaga/store', [JabatanLembagaController::class, 'store'])
+    ->name('jabatanlembaga.store');
+
+// Form edit jabatan lembaga
+Route::get('/jabatan-lembaga/{id}/edit', [JabatanLembagaController::class, 'edit'])
+    ->name('jabatanlembaga.edit');
+
+// Update data jabatan lembaga
+Route::put('/jabatan-lembaga/{id}', [JabatanLembagaController::class, 'update'])
+    ->name('jabatanlembaga.update');
+
+// Hapus data jabatan lembaga
+Route::delete('/jabatan-lembaga/{id}', [JabatanLembagaController::class, 'destroy'])
+    ->name('jabatanlembaga.destroy');
+
+
+
+//AnggotaLembaga
+Route::get('/anggota-lembaga', [AnggotaLembagaController::class, 'index'])
+    ->name('anggotalembaga.index');
+Route::get('/anggota-lembaga/create', [AnggotaLembagaController::class, 'create'])
+    ->name('anggotalembaga.create');
+Route::post('/anggota-lembaga', [AnggotaLembagaController::class, 'store'])
+    ->name('anggotalembaga.store');
+Route::get('/anggota-lembaga/{id}/edit', [AnggotaLembagaController::class, 'edit'])
+    ->name('anggotalembaga.edit');
+Route::put('/anggota-lembaga/{id}', [AnggotaLembagaController::class, 'update'])
+    ->name('anggotalembaga.update');
+Route::delete('/anggota-lembaga/{id}', [AnggotaLembagaController::class, 'destroy'])
+    ->name('anggotalembaga.destroy');
 
 
 

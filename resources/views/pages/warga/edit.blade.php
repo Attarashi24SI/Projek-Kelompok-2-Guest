@@ -47,9 +47,8 @@
             <div class="container mt-5">
                 <h3 class="mb-4">Edit Data Warga</h3>
 
-                <form action="{{ route('guest.warga.update', $warga->warga_id) }}" method="POST">
+                <form action="{{ route('pages.warga.update', $warga->warga_id) }}" method="POST">
                     @csrf
-
                     <div class="mb-3">
                         <label for="no_ktp" class="form-label">No KTP</label>
                         <input type="text" class="form-control" id="no_ktp" name="no_ktp" value="{{ $warga->no_ktp }}"
@@ -81,12 +80,17 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="telp" class="form-label">No Telepon</label>
+                        <input type="text" class="form-control" id="telp" name="telp">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" value="{{ $warga->email }}">
                     </div>
 
                     <button type="submit" class="btn btn-success">Simpan Perubahan</button>
-                    <a href="{{ route('guest.warga.index') }}" class="btn btn-secondary">Kembali</a>
+                    <a href="{{ route('pages.warga.index') }}" class="btn btn-secondary">Kembali</a>
                 </form>
             </div>
         </div>
@@ -94,7 +98,7 @@
 
 
         <!-- Copyright Start -->
-        
+
         <!-- Copyright End -->
 
 

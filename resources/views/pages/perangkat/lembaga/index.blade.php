@@ -52,25 +52,40 @@
             <a href="{{ route('pages.perangkat.lembaga.create') }}" class="btn btn-primary mb-3"><img src="https://cdn-icons-png.flaticon.com/128/6711/6711405.png" style="width:15%; height:15%;" alt="">Tambah Data</a>
 
             <div class="row">
-                @foreach ($dataLembaga as $lembaga)
-                    <div class="col-md-4">
-                        <div class="card mb-3 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $lembaga->nama_lembaga }}</h5>
-                                <p class="card-text">{{ $lembaga->deskripsi }}</p>
-                                <p class="card-text">Kontak: {{ $lembaga->kontak }}</p>
+    @foreach ($dataLembaga as $lembaga)
+        <div class="col-md-4">
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
 
-                                <a href="{{ route('pages.perangkat.lembaga.edit', $lembaga->lembaga_id) }}"
-                                    class="btn btn-primary mb-2"><img src="https://cdn-icons-png.flaticon.com/128/14034/14034300.png" style="width:15%; height:15%;" alt="">Edit</a>
+                    <h5 class="card-title">{{ $lembaga->nama_lembaga }}</h5>
+                    <p class="card-text">{{ $lembaga->deskripsi }}</p>
+                    <p class="card-text">Kontak: {{ $lembaga->kontak }}</p>
 
-                                <a href="{{ route('pages.perangkat.lembaga.destroy', $lembaga->lembaga_id) }}"
-                                    class="btn btn-danger mb-2"
-                                    onclick="return confirm('Yakin ingin menghapus data ini?')"><img src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" style="width:15%; height:15%;" alt="">Hapus</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                    <a href="{{ route('pages.perangkat.lembaga.edit', $lembaga->lembaga_id) }}"
+                       class="btn btn-primary mb-2">
+                        <img src="https://cdn-icons-png.flaticon.com/128/14034/14034300.png"
+                             style="width:15%; height:15%;" alt=""> Edit
+                    </a>
+
+                    {{-- FORM DELETE --}}
+                    <form action="{{ route('pages.perangkat.lembaga.destroy', $lembaga->lembaga_id) }}"
+                          method="POST"
+                          onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                        @csrf
+                        @method('DELETE')
+
+                        <button class="btn btn-danger mb-2" type="submit">
+                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png"
+                                 style="width:15%; height:15%;" alt=""> Hapus
+                        </button>
+                    </form>
+
+                </div>
             </div>
+        </div>
+    @endforeach
+</div>
+
         </div>
     </div>
     <!-- Feature End -->

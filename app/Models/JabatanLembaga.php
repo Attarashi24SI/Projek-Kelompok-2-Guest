@@ -2,21 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Lembaga extends Model
+class JabatanLembaga extends Model
 {
     use HasFactory;
 
-    protected $table = 'lembaga';
-    protected $primaryKey = 'lembaga_id';
+    protected $table = 'jabatan_lembaga';
+    protected $primaryKey = 'jabatan_id';
+
     protected $fillable = [
-        'nama_lembaga',
-        'deskripsi',
-        'kontak'
+        'lembaga_id',
+        'nama_jabatan',
+        'level',
     ];
 
+    // Relasi ke tabel lembaga
     public function lembaga()
     {
         return $this->belongsTo(Lembaga::class, 'lembaga_id', 'lembaga_id');
