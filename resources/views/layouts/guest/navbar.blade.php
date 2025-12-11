@@ -33,7 +33,7 @@
                     </a>
                 @else
                     <li class="nav-item nav-link">
-                        <a class="btn btn-primary" href="{{ route('auth') }}">Login</a>
+                        <a href="{{ route('auth') }}">Login</a>
                     </li>
                 @endauth
 

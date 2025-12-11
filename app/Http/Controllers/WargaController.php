@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Warga;
+use App\Models\warga;
 class WargaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filterableColumns = ['nama'];
+        $searchableColumns = ['nama', 'no_ktp', 'pekerjaan', 'agama'];
 
-        $data['dataWarga'] = Warga::all();
+        $data['dataWarga'] = warga::filter($request,$filterableColumns)->search($request,$searchableColumns)->paginate(12)->onEachSide(2) ;
         return view('pages.warga.index', $data);
     }
 

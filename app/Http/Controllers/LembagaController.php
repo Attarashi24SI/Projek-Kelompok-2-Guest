@@ -10,10 +10,12 @@ class LembagaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filterableColumns = ['nama_lembaga'];
+        $searchableColumns = ['nama_lembaga', 'deskripsi', 'kontak'];
         // Ambil semua data dari tabel lembaga
-        $dataLembaga = Lembaga::all();
+        $dataLembaga = Lembaga::filter($request,$filterableColumns)->search($request,$searchableColumns)->paginate(12)->onEachSide(2) ;
 
         // Kirim data ke view
         return view('pages.perangkat.lembaga.index', compact('dataLembaga'));

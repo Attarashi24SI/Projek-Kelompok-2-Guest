@@ -12,7 +12,7 @@ use App\Http\Controllers\JabatanLembagaController;
 
 Route::get('/', function () {
     return view('pages.home');
-});
+})->name('home');
 
 // home page
 Route::get('/home', function () {
@@ -28,23 +28,28 @@ Route::get('/about', function () {
 Route::post('question/store', [QuestionController::class, 'store'])
     ->name('question.store');
 
-// Auth Login Page
-Route::get('/login', [AuthController::class, 'index'])->name('login');
-Route::post('/login', [AuthController::class, 'process'])->name('login.process');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// // Auth Login Page
+// Route::get('/login', [AuthController::class, 'index'])->name('login');
+// Route::post('/login', [AuthController::class, 'process'])->name('login.process');
+// Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+// // Halaman login
+// Route::get('/auth', [AuthController::class, 'index'])->name('auth');
+// // Proses login (POST)
+// Route::post('/auth/process', [AuthController::class, 'process'])->name('auth.process');
+// // Logout
+// Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 
 
-// Halaman login
+// Tampilkan halaman login
 Route::get('/auth', [AuthController::class, 'index'])->name('auth');
 
-// Proses login (POST)
-Route::post('/auth/process', [AuthController::class, 'process'])->name('auth.process');
+// Proses login
+Route::post('/auth/process', [AuthController::class, 'login'])->name('auth.process');
 
 // Logout
-Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
-
-
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // warga

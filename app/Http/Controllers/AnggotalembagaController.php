@@ -7,12 +7,14 @@ use App\Models\AnggotaLembaga;
 use App\Models\Lembaga;
 use App\Models\Warga;
 use App\Models\JabatanLembaga;
-
 class AnggotaLembagaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $anggota_lembaga = AnggotaLembaga::with(['lembaga', 'warga', 'jabatan'])->get();
+        $filterableColumns = ['level'];
+        $searchableColumns = ['nama','nama_jabatan','level'];
+
+        $anggota_lembaga = AnggotaLembaga::filter($request,$filterableColumns)->paginate(12);
         return view('pages.anggotalembaga.index', compact('anggota_lembaga'));
     }
 
@@ -75,4 +77,6 @@ class AnggotaLembagaController extends Controller
         return redirect()->route('anggotalembaga.index')
             ->with('success', 'Anggota berhasil dihapus!');
     }
+
+    
 }

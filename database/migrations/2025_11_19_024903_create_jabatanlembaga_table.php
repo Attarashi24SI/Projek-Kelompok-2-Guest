@@ -9,21 +9,21 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('jabatan_lembaga', function (Blueprint $table) {
-        $table->id('jabatan_id');
-        $table->unsignedBigInteger('lembaga_id');
-        $table->string('nama_jabatan', 100);
-        $table->integer('level')->default(1);
-        $table->timestamps();
+    {
+        Schema::create('jabatan_lembaga', function (Blueprint $table) {
+            $table->id('jabatan_id');
+            $table->unsignedBigInteger('lembaga_id');
+            $table->string('nama_jabatan', 100);
+            $table->integer('level')->default(1);
+            $table->timestamps();
 
-        // Relasi ke tabel lembaga
-        $table->foreign('lembaga_id')
-              ->references('lembaga_id')->on('lembaga')
-              ->onDelete('cascade')
-              ->onUpdate('cascade');
-    });
-}
+            // Relasi ke tabel lembaga
+            $table->foreign('lembaga_id')
+                ->references('lembaga_id')->on('lembaga')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
+    }
 
 
 

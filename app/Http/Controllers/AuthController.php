@@ -1,79 +1,53 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function index()
     {
-        return view('pages.auth.login');
+        return view('pages.auth.login'); // sesuai lokasi view yang kamu kirim
     }
 
     public function login(Request $request)
     {
         // Validasi input
         $request->validate([
-            'name' => 'required|min:5',
-            'password' => [
-                'required',
-                'min:3',
-                'regex:/[A-Z]/' // harus mengandung huruf besar
-            ],
-        ], [
-            'name.required' => 'Isi Field Username',
-            'password.required' => 'Password Wajib Diisi',
-            'name.min' => 'Username Minimal 5 Karakter',
-            'password.min' => 'Password Minimal 3 Karakter',
-            'password.regex' => 'Password Harus Mengandung Huruf Besar'
+            'email'    => 'required|email',
+            'password' => 'required',
         ]);
 
-        // Cek user berdasarkan name
-        $user = User::where('name', $request->name)->first();
+        // Cari user berdasarkan email
+        $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
-            return back()->withErrors(['name' => 'Username tidak ditemukan'])->withInput();
+        // Cek user & password
+        if ($user && Hash::check($request->password, $user->password)) {
+
+            // Login user -> set session
+            Auth::login($user);
+            $request->session()->regenerate();
+
+            // Redirect sesuai modul
+            return redirect()->route('home')->with('success', 'Login berhasil!');
         }
 
-        // Cek password
-        if (!Hash::check($request->password, $user->password)) {
-            return back()->withErrors(['password' => 'Password salah'])->withInput();
-        }
-
-        // Login berhasil
-        Auth::login($user);
-
-        // Redirect ke halaman dashboard / home
-        return redirect()->route('pages.home')->with('success', 'Berhasil login!');
+        // Jika gagal login
+        return back()
+            ->withErrors(['email' => 'Email atau password salah'])
+            ->withInput();
     }
 
-    public function process(Request $request)
-{
-    $request->validate([
-        'name' => 'required|min:5',
-        'password' => 'required|min:3',
-    ]);
+    public function logout(Request $request)
+    {
+        Auth::logout();
 
-    $user = User::where('name', $request->name)->first();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    if ($user && Hash::check($request->password, $user->password)) {
-        Auth::login($user);
-        return redirect()->route('pages.home')->with('success', 'Login berhasil!');
+        return redirect()->route('auth')->with('success', 'Berhasil logout!');
     }
-
-    return back()->withErrors(['login' => 'Username atau password salah']);
 }
-
-
-    public function logout()
-{
-
-    return redirect()->route('auth')->with('success', 'Berhasil logout!');
-}
-
-}
-

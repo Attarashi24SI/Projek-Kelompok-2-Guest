@@ -11,9 +11,11 @@ class JabatanlembagaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $jabatan_lembaga = JabatanLembaga::with('lembaga')->get();
+        $filterableColumns = ['nama_jabatan'];
+        $searchableColumns  = ['nama_jabatan', 'level'];
+        $jabatan_lembaga = JabatanLembaga::with('lembaga')->search($request,$searchableColumns)->paginate(12)->onEachSide(2) ;
 
         return view('pages.jabatanlembaga.index', compact('jabatan_lembaga'));
     }
