@@ -31,6 +31,9 @@
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout
                     </a>
+                    <a class="nav-item nav-link">
+                        {{session('last_login')}}
+                    </a>
                 @else
                     <li class="nav-item nav-link">
                         <a href="{{ route('auth') }}">Login</a>

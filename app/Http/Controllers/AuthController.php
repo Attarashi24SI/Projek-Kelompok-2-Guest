@@ -10,6 +10,9 @@ class AuthController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
         return view('pages.auth.login'); // sesuai lokasi view yang kamu kirim
     }
 
@@ -17,7 +20,7 @@ class AuthController extends Controller
     {
         // Validasi input
         $request->validate([
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
@@ -29,6 +32,7 @@ class AuthController extends Controller
 
             // Login user -> set session
             Auth::login($user);
+            session(['last_login' => now()]);
             $request->session()->regenerate();
 
             // Redirect sesuai modul

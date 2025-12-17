@@ -9,10 +9,11 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AnggotaLembagaController;
 use App\Http\Controllers\JabatanLembagaController;
+use App\Http\Controllers\MultipleuploadsController;
 
 Route::get('/', function () {
     return view('pages.home');
-})->name('home');
+})->name('home')->middleware('checkislogin');
 
 // home page
 Route::get('/home', function () {
@@ -52,19 +53,50 @@ Route::post('/auth/process', [AuthController::class, 'login'])->name('auth.proce
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-// warga
-// tampilkan data
-Route::get('/warga', [WargaController::class, 'index'])->name('pages.warga.index');
-// tampilkan form tambah data
-Route::get('/warga/create', [WargaController::class, 'create'])->name('pages.warga.create');
-// simpan data baru
-Route::post('/warga/store', [WargaController::class, 'store'])->name('pages.warga.store');
-// tampilkan form edit
-Route::get('/warga/edit/{id}', [WargaController::class, 'edit'])->name('pages.warga.edit');
-// update data hasil edit
-Route::post('/warga/update/{id}', [WargaController::class, 'update'])->name('pages.warga.update');
-// hapus data
-Route::get('/warga/delete/{id}', [WargaController::class, 'delete'])->name('pages.warga.delete');
+// // warga
+// // tampilkan data
+// Route::get('/warga', [WargaController::class, 'index'])->name('pages.warga.index');
+// // tampilkan form tambah data
+// Route::get('/warga/create', [WargaController::class, 'create'])->name('pages.warga.create');
+// // simpan data baru
+// Route::post('/warga/store', [WargaController::class, 'store'])->name('pages.warga.store');
+// // tampilkan form edit
+// Route::get('/warga/edit/{id}', [WargaController::class, 'edit'])->name('pages.warga.edit');
+// // update data hasil edit
+// Route::post('/warga/update/{id}', [WargaController::class, 'update'])->name('pages.warga.update');
+// // hapus data
+// Route::get('/warga/delete/{id}', [WargaController::class, 'delete'])->name('pages.warga.delete');
+
+// Middleware applied to user management routes WargaController
+Route::group(['middleware' => ['checkislogin']], function () {
+
+    // Semua user yang login boleh melihat daftar / detail warga
+    // tampilkan data
+    Route::get('/warga', [WargaController::class, 'index'])->name('pages.warga.index');
+    // (opsional) jika ada route show/detail
+    // Route::get('/warga/{id}', [WargaController::class, 'show'])->name('pages.warga.show');
+
+    // Hanya Super Admin => akses penuh untuk create/store/delete
+    Route::group(['middleware' => ['checkrole:Super Admin']], function () {
+        // tampilkan form tambah data
+        Route::get('/warga/create', [WargaController::class, 'create'])->name('pages.warga.create');
+        // simpan data baru
+        Route::post('/warga/store', [WargaController::class, 'store'])->name('pages.warga.store');
+        // hapus data
+        Route::get('/warga/delete/{id}', [WargaController::class, 'delete'])->name('pages.warga.delete');
+    });
+
+    // Super Admin atau mitra => hanya boleh edit & update
+    Route::group(['middleware' => ['checkrole:Super Admin,mitra']], function () {
+        // tampilkan form edit
+        Route::get('/warga/edit/{id}', [WargaController::class, 'edit'])->name('pages.warga.edit');
+        // update data hasil edit
+        Route::post('/warga/update/{id}', [WargaController::class, 'update'])->name('pages.warga.update');
+    });
+
+});
+
+
 
 // user
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
@@ -137,6 +169,10 @@ Route::delete('/anggota-lembaga/{id}', [AnggotaLembagaController::class, 'destro
     ->name('anggotalembaga.destroy');
 
 
+// Multipleuploads
+Route::get('/multipleuploads', [MultipleuploadsController::class, 'index'])
+    ->name('uploads');
 
-
+Route::post('/save', [MultipleuploadsController::class, 'store'])
+    ->name('uploads.store');
 

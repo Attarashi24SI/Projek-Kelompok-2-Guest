@@ -1,69 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah Data Lembaga</title>
-</head>
-
 @extends('layouts.guest.app')
+
 @section('content')
-
-<body>
-
-    <!-- Spinner Start -->
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
-
-    <!-- Modal Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h4 class="modal-title mb-0" id="exampleModalLabel">Search by keyword</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center">
-                    <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="keywords"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text btn border p-3"><i
-                                class="fa fa-search text-white"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Search End -->
-
-    <!-- Feature Start -->
     <div class="container-fluid feature bg-light py-5">
         <div class="container mt-5">
             <h3 class="mb-4">Tambah Data Lembaga</h3>
 
-            <form action="{{ route('pages.perangkat.lembaga.store') }}" method="POST">
+            {{-- Pesan sukses --}}
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            {{-- Pesan error global --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $err)
+                            <li>{{ $err }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('pages.perangkat.lembaga.store') }}" method="POST" enctype="multipart/form-data"> {{--
+                wajib untuk upload --}}
                 @csrf
 
                 <div class="mb-3">
                     <label for="nama_lembaga" class="form-label">Nama Lembaga</label>
-                    <input type="text" class="form-control" id="nama_lembaga" name="nama_lembaga" required>
+                    <input type="text" class="form-control @error('nama_lembaga') is-invalid @enderror" id="nama_lembaga"
+                        name="nama_lembaga" value="{{ old('nama_lembaga') }}" required>
+                    @error('nama_lembaga')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                    <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi"
+                        rows="3">{{ old('deskripsi') }}</textarea>
+                    @error('deskripsi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="kontak" class="form-label">Kontak</label>
-                    <input type="text" class="form-control" id="kontak" name="kontak">
+                    <input type="text" class="form-control @error('kontak') is-invalid @enderror" id="kontak" name="kontak"
+                        value="{{ old('kontak') }}">
+                    @error('kontak')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Upload gambar (opsional) --}}
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Gambar (opsional)</label>
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
+                        accept="image/*">
+                    @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <div class="form-text">Format: jpg, png, gif, svg, webp. Maks 10MB.</div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -71,15 +68,4 @@
             </form>
         </div>
     </div>
-    <!-- Feature End -->
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top">
-        <i class="fa fa-arrow-up"></i>
-    </a>
-
 @endsection
-
-</body>
-
-</html>
