@@ -3,7 +3,7 @@
 
     <div class="container-fluid feature bg-light py-5">
         <div class="container mt-5">
-            <h3 class="mb-4">Edit Data User</h3>
+            <h3 class="mb-4">Edit Data Anggota Lembaga</h3>
 
             <form action="{{ route('anggotalembaga.update', $anggota->anggota_id) }}" method="POST">
                 @csrf

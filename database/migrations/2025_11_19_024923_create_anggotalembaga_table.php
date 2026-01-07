@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('anggota_lembaga', function (Blueprint $table) {
             $table->id('anggota_id');
             $table->unsignedBigInteger('lembaga_id');
-            $table->unsignedInteger('warga_id'); 
+            $table->unsignedInteger('warga_id');
             $table->unsignedBigInteger('jabatan_id');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai')->nullable();
@@ -46,6 +46,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('anggotalembaga');
+        Schema::dropIfExists('anggota_lembaga');
     }
 };

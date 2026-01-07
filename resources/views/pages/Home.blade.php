@@ -188,12 +188,29 @@
                     </div>
                     <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
                         <div class="about-item">
-                            <h4 class="text-primary text-uppercase">About Us</h4>
-                            <h1 class="display-3 mb-3">Projek Bina Desa</h1>
-                            <p class="mb-4">Bina Desa adalah program pengabdian masyarakat yang bertujuan untuk meningkatkan
-                                kesejahteraan dan kemandirian masyarakat desa melalui penerapan ilmu pengetahuan, teknologi,
-                                serta inovasi sosial.
-                            </p>
+                            <h1 class="display-3 mb-3">Perangkat Dan Lembaga</h1>
+                            <div class="bg-light rounded p-4 mb-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex">
+                                            <div class="pe-4">
+                                                <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center"
+                                                    style="width: 80px; height: 80px;">
+                                                    <i class="fas fa-question text-white fa-2x"></i>
+                                                </div>
+
+                                            </div>
+                                            <div class="">
+                                                <a href="{{ url('/about') }}"" class="h4 d-inline-block mb-3">About Us</a>
+                                                <p class="mb-0">Website ini menyajikan informasi resmi tentang Perangkat
+                                                    Desa dan Lembaga Desa, mencakup struktur, jabatan, serta peran
+                                                    masing-masing dalam mendukung penyelenggaraan pemerintahan dan kegiatan
+                                                    kemasyarakatan di tingkat desa.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="bg-light rounded p-4 mb-4">
                                 <div class="row">
                                     <div class="col-12">
@@ -224,7 +241,8 @@
                                                         class="fas fa-faucet text-white fa-2x"></i></div>
                                             </div>
                                             <div class="">
-                                                <a href="#" class="h4 d-inline-block mb-3">Pengembangan Potensi Desa</a>
+                                                <a href="#" class="h4 d-inline-block mb-3">Pengembangan Potensi
+                                                    Desa</a>
                                                 <p class="mb-0">Kami mendorong pengembangan potensi lokal desa dengan
                                                     memanfaatkan teknologi, inovasi, dan kearifan lokal untuk menciptakan
                                                     desa yang mandiri, produktif, dan berkelanjutan.</p>
@@ -422,81 +440,129 @@
         <!-- Service End -->
 
 
+
+
+
         <!-- Products Start -->
-        <div class="container-fluid product py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                    <h4 class="text-uppercase text-primary">Our Teams</h4>
-                    <h1 class="display-3 text-capitalize mb-3">We Deliver Best Quality Bottle Packs.</h1>
-                </div>
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="product-item">
-                            {{-- <img src="img/product-3.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
-                            <div class="product-content bg-light text-center rounded-bottom p-4">
+        @if (auth()->check() && auth()->user()->role === 'admin')
+            <div class="container-fluid product py-5">
+                <div class="container py-5">
+                    <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                        <h4 class="text-uppercase text-primary">Our Teams</h4>
+                        <h1 class="display-3 text-capitalize mb-3">Perangkat Lembaga serta Orang Orangnya</h1>
+                    </div>
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="product-item">
+                                {{-- <img src="img/product-3.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                                <div class="product-content bg-light text-center rounded-bottom p-4">
 
-                                <a href="#" class="h4 d-inline-block mb-3">Warga</a>
-                                <p class="fs-4 text-primary mb-3"></p>
-                                <a href="{{ route('pages.warga.index') }}"
-                                    class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                                    <a href="#" class="h4 d-inline-block mb-3">Warga</a>
+                                    <p class="fs-4 text-primary mb-3"></p>
+                                    <a href="{{ route('pages.warga.index') }}"
+                                        class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="product-item">
-                            {{-- <img src="img/product-2.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
-                            <div class="product-content bg-light text-center rounded-bottom p-4">
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="product-item">
+                                {{-- <img src="img/product-2.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                                <div class="product-content bg-light text-center rounded-bottom p-4">
 
-                                <a href="#" class="h4 d-inline-block mb-3">User</a>
-                                <p class="fs-4 text-primary mb-3"></p>
-                                <a href="{{ route('user.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">Read
-                                    More</a>
+                                    <a href="#" class="h4 d-inline-block mb-3">User</a>
+                                    <p class="fs-4 text-primary mb-3"></p>
+                                    <a href="{{ route('user.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">Read
+                                        More</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="product-item">
-                            {{-- <img src="img/product-1.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
-                            <div class="product-content bg-light text-center rounded-bottom p-4">
 
-                                <a href="#" class="h4 d-inline-block mb-3">Lembaga Desa</a>
-                                <p class="fs-4 text-primary mb-3"></p>
-                                <a href="{{ route('pages.perangkat.lembaga.index') }}"
-                                    class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="product-item">
+                                {{-- <img src="img/product-2.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                                <div class="product-content bg-light text-center rounded-bottom p-4">
+                                    <a href="#" class="h4 d-inline-block mb-3">Rukun Tetangga</a>
+                                    <p class="fs-4 text-primary mb-3"></p>
+                                    <a href="{{ route('rt.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">
+                                        Read More
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
 
-                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="product-item">
-                            {{-- <img src="img/product-1.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
-                            <div class="product-content bg-light text-center rounded-bottom p-4">
-
-                                <a href="#" class="h4 d-inline-block mb-3">Jabatan Lembaga</a>
-                                <p class="fs-4 text-primary mb-3"></p>
-                                <a href="{{ route('jabatanlembaga.index') }}"
-                                    class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="product-item">
+                                {{-- <img src="img/product-2.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                                <div class="product-content bg-light text-center rounded-bottom p-4">
+                                    <a href="#" class="h4 d-inline-block mb-3">Rukun Warga</a>
+                                    <p class="fs-4 text-primary mb-3"></p>
+                                    <a href="{{ route('rw.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">
+                                        Read More
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="product-item">
-                            {{-- <img src="img/product-1.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
-                            <div class="product-content bg-light text-center rounded-bottom p-4">
-
-                                <a href="#" class="h4 d-inline-block mb-3">Anggota Lembaga</a>
-                                <p class="fs-4 text-primary mb-3"></p>
-                                <a href="{{ route('anggotalembaga.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="product-item">
+                                {{-- <img src="img/product-2.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                                <div class="product-content bg-light text-center rounded-bottom p-4">
+                                    <a href="#" class="h4 d-inline-block mb-3">Perangkat Desa</a>
+                                    <p class="fs-4 text-primary mb-3"></p>
+                                    <a href="{{ route('perangkat.index') }}" class="btn btn-secondary rounded-pill py-2 px-4">
+                                        Read More
+                                    </a>
+                                </div>
                             </div>
                         </div>
+
+
+
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="product-item">
+                                {{-- <img src="img/product-1.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                                <div class="product-content bg-light text-center rounded-bottom p-4">
+
+                                    <a href="#" class="h4 d-inline-block mb-3">Lembaga Desa</a>
+                                    <p class="fs-4 text-primary mb-3"></p>
+                                    <a href="{{ route('pages.perangkat.lembaga.index') }}"
+                                        class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="product-item">
+                                {{-- <img src="img/product-1.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                                <div class="product-content bg-light text-center rounded-bottom p-4">
+
+                                    <a href="#" class="h4 d-inline-block mb-3">Jabatan Lembaga</a>
+                                    <p class="fs-4 text-primary mb-3"></p>
+                                    <a href="{{ route('jabatanlembaga.index') }}"
+                                        class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="product-item">
+                                {{-- <img src="img/product-1.png" class="img-fluid w-100 rounded-top" alt="Image"> --}}
+                                <div class="product-content bg-light text-center rounded-bottom p-4">
+
+                                    <a href="#" class="h4 d-inline-block mb-3">Anggota Lembaga</a>
+                                    <p class="fs-4 text-primary mb-3"></p>
+                                    <a href="{{ route('anggotalembaga.index') }}"
+                                        class="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
-
-
                 </div>
             </div>
-        </div>
+        @endif
         <!-- Products End -->
 
 
@@ -780,8 +846,6 @@
 
 
         <!-- Back to Top -->
-
-
 @endsection
 
 </body>

@@ -80,8 +80,9 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                     @if(request('search'))
-							<a href="{{ request()->fullUrlWithQuery(['search'=> null]) }}" class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
-					@endif
+                                        <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}"
+                                            class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
+                                    @endif
                                 </button>
                             </div>
                         </div>
@@ -137,9 +138,6 @@
             </div>
         </div>
         <!-- feature End -->
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
 
 

@@ -1,12 +1,16 @@
 <?php
 
+use App\Models\Rt;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RtController;
+use App\Http\Controllers\RwController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\LembagaController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PerangkatDesaController;
 use App\Http\Controllers\AnggotaLembagaController;
 use App\Http\Controllers\JabatanLembagaController;
 use App\Http\Controllers\MultipleuploadsController;
@@ -21,9 +25,8 @@ Route::get('/home', function () {
 })->name('pages.home');
 
 // Halaman About
-Route::get('/about', function () {
-    return view('pages.about');
-})->name('pages.about');
+Route::view('/about', 'pages.about')->name('about');
+
 
 
 Route::post('question/store', [QuestionController::class, 'store'])
@@ -69,15 +72,13 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Middleware applied to user management routes WargaController
 Route::group(['middleware' => ['checkislogin']], function () {
-
     // Semua user yang login boleh melihat daftar / detail warga
     // tampilkan data
     Route::get('/warga', [WargaController::class, 'index'])->name('pages.warga.index');
     // (opsional) jika ada route show/detail
     // Route::get('/warga/{id}', [WargaController::class, 'show'])->name('pages.warga.show');
-
     // Hanya Super Admin => akses penuh untuk create/store/delete
-    Route::group(['middleware' => ['checkrole:Super Admin']], function () {
+    Route::group(['middleware' => ['checkrole:admin']], function () {
         // tampilkan form tambah data
         Route::get('/warga/create', [WargaController::class, 'create'])->name('pages.warga.create');
         // simpan data baru
@@ -87,7 +88,7 @@ Route::group(['middleware' => ['checkislogin']], function () {
     });
 
     // Super Admin atau mitra => hanya boleh edit & update
-    Route::group(['middleware' => ['checkrole:Super Admin,mitra']], function () {
+    Route::group(['middleware' => ['checkrole:admin,user']], function () {
         // tampilkan form edit
         Route::get('/warga/edit/{id}', [WargaController::class, 'edit'])->name('pages.warga.edit');
         // update data hasil edit
@@ -99,12 +100,21 @@ Route::group(['middleware' => ['checkislogin']], function () {
 
 
 // user
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
+// USER ROUTES
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
-Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+// ADMIN & USER boleh: lihat + tambah user
+Route::middleware('role:admin,user')->group(function () {
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+});
+
+// HANYA ADMIN boleh: edit + update + delete
+Route::middleware('role:admin')->group(function () {
+    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+});
 
 
 // lembaga
@@ -175,4 +185,15 @@ Route::get('/multipleuploads', [MultipleuploadsController::class, 'index'])
 
 Route::post('/save', [MultipleuploadsController::class, 'store'])
     ->name('uploads.store');
+
+
+
+//Rw
+Route::resource('rw', RwController::class);
+
+//Rt
+Route::resource('rt', RtController::class);
+
+//perangkat desa
+Route::resource('perangkat', PerangkatDesaController::class);
 

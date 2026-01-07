@@ -11,16 +11,23 @@ class CheckRole
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next , ...$role): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (in_array(Auth::user()->role, $role)) {
+        // jika belum login
+        if (!Auth::check()) {
+            return redirect()->route('auth'); // atau route loginmu
+        }
+
+        // Ambil role user
+        $userRole = Auth::user()->role;
+
+        // Jika role ada di daftar yang diizinkan
+        if (in_array($userRole, $roles)) {
             return $next($request);
         }
 
-        return abort('403');
-
+        // Jika tidak punya akses
+        return abort(403, 'Anda tidak punya akses.');
     }
 }
